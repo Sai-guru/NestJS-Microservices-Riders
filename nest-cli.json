@@ -10,13 +10,13 @@
   "monorepo": true,
   "root": "apps/nestjs-microservices-Riders",
   "projects": {
-    "login-service": {
+    "logging-service": {
       "type": "application",
-      "root": "apps/login-service",
+      "root": "apps/logging-service",
       "entryFile": "main",
-      "sourceRoot": "apps/login-service/src",
+      "sourceRoot": "apps/logging-service/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/login-service/tsconfig.app.json"
+        "tsConfigPath": "apps/logging-service/tsconfig.app.json"
       }
     },
     "nestjs-microservices-Riders": {
@@ -26,6 +26,15 @@
       "sourceRoot": "apps/nestjs-microservices-Riders/src",
       "compilerOptions": {
         "tsConfigPath": "apps/nestjs-microservices-Riders/tsconfig.app.json"
+      }
+    },
+    "rider-service": {
+      "type": "application",
+      "root": "apps/rider-service",
+      "entryFile": "main",
+      "sourceRoot": "apps/rider-service/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/rider-service/tsconfig.app.json"
       }
     }
   }
