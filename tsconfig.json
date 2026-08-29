@@ -28,10 +28,16 @@
       "path": "./apps/nestjs-microservices-Riders/tsconfig.app.json"
     },
     {
-      "path": "./apps/rider-service/tsconfig.app.json"
+      "path": "./apps/gateway/tsconfig.app.json"
     },
     {
-      "path": "./apps/logging-service/tsconfig.app.json"
+      "path": "./apps/catalog/tsconfig.app.json"
+    },
+    {
+      "path": "./apps/media/tsconfig.app.json"
+    },
+    {
+      "path": "./apps/search/tsconfig.app.json"
     }
   ]
 }

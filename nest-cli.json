@@ -10,13 +10,31 @@
   "monorepo": true,
   "root": "apps/nestjs-microservices-Riders",
   "projects": {
-    "logging-service": {
+    "catalog": {
       "type": "application",
-      "root": "apps/logging-service",
+      "root": "apps/catalog",
       "entryFile": "main",
-      "sourceRoot": "apps/logging-service/src",
+      "sourceRoot": "apps/catalog/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/logging-service/tsconfig.app.json"
+        "tsConfigPath": "apps/catalog/tsconfig.app.json"
+      }
+    },
+    "gateway": {
+      "type": "application",
+      "root": "apps/gateway",
+      "entryFile": "main",
+      "sourceRoot": "apps/gateway/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/gateway/tsconfig.app.json"
+      }
+    },
+    "media": {
+      "type": "application",
+      "root": "apps/media",
+      "entryFile": "main",
+      "sourceRoot": "apps/media/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/media/tsconfig.app.json"
       }
     },
     "nestjs-microservices-Riders": {
@@ -28,13 +46,13 @@
         "tsConfigPath": "apps/nestjs-microservices-Riders/tsconfig.app.json"
       }
     },
-    "rider-service": {
+    "search": {
       "type": "application",
-      "root": "apps/rider-service",
+      "root": "apps/search",
       "entryFile": "main",
-      "sourceRoot": "apps/rider-service/src",
+      "sourceRoot": "apps/search/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/rider-service/tsconfig.app.json"
+        "tsConfigPath": "apps/search/tsconfig.app.json"
       }
     }
   }
