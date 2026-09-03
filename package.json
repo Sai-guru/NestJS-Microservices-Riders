@@ -12,6 +12,14 @@
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",
+    
+
+    "gateway": "nest start gateway --watch",
+    "catalog": "nest start catalog --watch",
+    "media": "nest start media --watch",
+    "search-service": "nest start search --watch",
+
+
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/apps/nestjs-microservices-Riders/main",
     "lint": "oxlint src/ test/",

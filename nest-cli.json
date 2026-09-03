@@ -1,14 +1,16 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "apps/nestjs-microservices-Riders/src",
+  "sourceRoot": ".",
   "compilerOptions": {
     "deleteOutDir": true,
-    "builder": "rspack",
-    "tsConfigPath": "apps/nestjs-microservices-Riders/tsconfig.app.json"
+    "builder": "rspack"
   },
   "monorepo": true,
-  "root": "apps/nestjs-microservices-Riders",
+  "root": ".",
+
+
+
   "projects": {
     "catalog": {
       "type": "application",

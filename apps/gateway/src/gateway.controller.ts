@@ -9,4 +9,14 @@ export class GatewayController {
   getHello(): string {
     return this.gatewayService.getHello();
   }
+
+  @Get('/health')
+  healthCheck(): any {
+
+    return {
+     ok: true,
+      service: 'Gateway Service',
+      timestamp: new Date().toLocaleDateString(),
+    }
+  }
 }
