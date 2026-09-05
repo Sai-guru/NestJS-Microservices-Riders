@@ -10,7 +10,7 @@ async function bootstrap() {
   const logger = new Logger('GatewayBootstrap');
   const app = await NestFactory.create(GatewayModule)
 
-  const Port = Number(process.env.GATEWAY_PORT ?? 3000);
+  const Port = Number(process.env.GATEWAY_PORT ?? 4000);
   app.enableShutdownHooks();
 
   // app.setGlobalPrefix('api');
