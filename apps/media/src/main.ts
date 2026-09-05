@@ -48,6 +48,5 @@ async function bootstrap() {
   //start our rabbitmq-nestjs-microservices container in portainer(or docker desktop) and then run this media service, then you will see the below log in the console
   logger.log(`Media RMQ is listening on queue ${queueName} via ${rmqUrl}`);
 
-
 }
 await bootstrap();
