@@ -12,6 +12,7 @@ export class MediaService {
     return {
       ok: true,
       cool:'good',
+      myWishField: 'I wanna become invulnerable',
       service: 'media',
       now : new Date().toISOString(),
     }
