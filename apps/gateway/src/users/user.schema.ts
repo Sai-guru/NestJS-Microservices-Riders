@@ -1,11 +1,13 @@
 import {Prop, Schema, SchemaFactory} from "@nestjs/mongoose";
+import { HydratedDocument } from "mongoose";
 
+export type UserDocument = HydratedDocument<User>;
 
 // Mongoose (MongoDB + NestJS/Node): 
 // By default, Mongoose automatically pluralizes and converts the class name User to lowercase, naming your MongoDB collection users.
 // Automatically pluralizes and lowercases the model name (e.g., User becomes users, AdminProfile becomes adminprofiles). You can override this in NestJS using @Schema({ collection: 'my_custom_name' }).
 
-@Schema({ timestamps: true, collection: 'users' })
+@Schema({ timestamps: true, collection: 'users'})
 export class User {
 
     @Prop({ required: true, unique: true ,index: true })
