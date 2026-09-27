@@ -1,0 +1,5 @@
+
+for public.decorator.ts
+//search for public decorator in the docs and you will find this below linek but see that enable auth globally justg few lines after u can that IS_PUBLIC_KEY is used in the docs to enable auth globally
+https://docs.nestjs.com/security/authentication#enable-authentication-globally
+

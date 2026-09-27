@@ -30,7 +30,7 @@ export class GatewayController {
 
   @Get('health')
   async health() {
-    const ping  = async (serviceName : string,client : ClientProxy) => {
+    const ping  = async(serviceName : string,client : ClientProxy) => {
       try{
 
         const result = await firstValueFrom(
