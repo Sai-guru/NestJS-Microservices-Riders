@@ -25,7 +25,10 @@ export class UsersService {
 
             //  Upsert is a combination of Update + Insert.
 
-        const options = { upsert: true, new: true, setDefaultsOnInsert: true };
+        const options = { upsert: true, 
+            // new: true --> this is depreated in mongoose 7, Returns the modifed, updated document (what you want for an upsert). .....so ////instead use returnDocument: 'after'
+            returnDocument: 'after' as const, //Returns the original document before the updates were applied.
+            setDefaultsOnInsert: true };
 //         Mongoose automatically turns it into this before sending it to MongoDB:
 // typescript
 // const update = {  

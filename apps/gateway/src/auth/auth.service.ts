@@ -1,4 +1,4 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { createClerkClient, verifyToken} from "@clerk/backend";
 import { UserContext } from "./auth.types.js";
 
@@ -26,7 +26,7 @@ export class AuthService {
             const clerkUserId = payload.sub ?? payload.userId;
 
             if(!clerkUserId) {
-                throw new Error("Token is missing user id");
+                throw new UnauthorizedException("Token is missing user id");
             }
 
             const role : 'user' | 'admin' = 'user';

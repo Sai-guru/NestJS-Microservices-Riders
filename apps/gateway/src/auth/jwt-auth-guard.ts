@@ -1,10 +1,11 @@
 
-import { Injectable, CanActivate, ExecutionContext, UnauthorizedException } from '@nestjs/common';
+import { Injectable, CanActivate, ExecutionContext, UnauthorizedException, ForbiddenException } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { AuthService } from './auth.service.js';
 import { Reflector } from '@nestjs/core';
 import { UsersService } from '../users/user.service.js';
 import { IS_PUBLIC_KEY } from './public.decorator.js';
+import { REQUIRED_ROLE_KEY } from './admin.decorator.js';
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
@@ -15,7 +16,7 @@ export class JwtAuthGuard implements CanActivate {
         private readonly usersService : UsersService ) {}
 
         //take from the docs : https://docs.nestjs.com/guards#execution-context
-    canActivate( context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
+    async canActivate( context: ExecutionContext):  Promise<boolean>{
         //if the handler is marked as public means anyone can access this route.
         
         //flagged as public handler
@@ -33,23 +34,46 @@ export class JwtAuthGuard implements CanActivate {
             throw new UnauthorizedException("Missing or invalid authorization header");
         }
 
-        const token = authorization.split(' ')[1];
+        //extract the token from the authorization bearer token
+        const token = authorization.startsWith('Bearer ') ? authorization.slice('Bearer '.length).trim() : '';
+
         if(!token) {
-            return false;
+            // return false;
+             throw new UnauthorizedException("Missing auth token");
         }
         //verify the token and build the user context
-        return this.authService.verifyAndBuildContext(token)
-            .then(async (userContext) => {
-                //upsert the user in the database
-                await this.usersService.upsertAuthUser(userContext);
-                //attach the user context to the request object
-                req.user = userContext;
-                return true;
-            })
-            .catch((err) => {
-                console.error("Error verifying token:", err);
-                return false;
-            });
-    
+
+        const identifyAuthUser = await this.authService.verifyAndBuildContext(token);
+
+        const dbUser = await this.usersService.upsertAuthUser({
+            clerkUserId: identifyAuthUser.clerkUserId,
+            email: identifyAuthUser.email,
+            name: identifyAuthUser.name,
+        });
+        
+        if (!dbUser) {
+    throw new UnauthorizedException("Unable to identify user");
+}
+
+        const user = {
+            ...identifyAuthUser,
+            role: dbUser.role,
+        }
+
+        //attach users, so controllers can read it via @currentuser()
+        req.user = user;
+
+        const requiredRole = this.reflector.getAllAndOverride<string>(REQUIRED_ROLE_KEY, [
+            context.getHandler(),
+            context.getClass()
+        ]);
+
+        //admin access required, but the user is not an admin
+        if(requiredRole === 'admin' && user.role !== 'admin') {
+            throw new ForbiddenException("Admin access required");
+        }
+        return true;
+        
+        
   }
 }

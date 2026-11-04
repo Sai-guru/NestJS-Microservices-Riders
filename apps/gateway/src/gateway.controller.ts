@@ -2,6 +2,7 @@ import { Controller, Get, Inject } from '@nestjs/common';
 import { GatewayService } from './gateway.service.js';
 import { ClientProxy } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
+import { Public } from './auth/public.decorator.js';
 
 @Controller()
 export class GatewayController {
@@ -28,7 +29,9 @@ export class GatewayController {
   //   }
   // }
 
+  //as of now all routes are guarded by def ult , then for some few routes we can keep it public
   @Get('health')
+  @Public()
   async health() {
     const ping  = async(serviceName : string,client : ClientProxy) => {
       try{
