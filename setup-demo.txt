@@ -1,0 +1,40 @@
+Here are the exact terminal commands to initialize, structure, install dependencies, and run your NestJS microservices monorepo using pnpm:
+
+1. Initialize the Workspace
+pnpm dlx @nestjs/cli new . --skip-git
+
+-> choose npm or pnpm or bun ..
+
+2. Generate the Microservice App
+pnpm dlx @nestjs/cli generate app <service-name>
+
+
+3. Install Microservices Package
+
+pnpm add @nestjs/microservices
+
+
+4. Run the Applications (Use Separate Terminals)
+
+• Terminal 1 (Start Gateway):bash
+pnpm exec nest start nestjs-trial --watch
+Use code with caution.
+• Terminal 2 (Start Microservice):bash
+pnpm exec nest start auth-service --watch
+
+
+
+
+my-workspace/
+├── apps/
+│   ├── nestjs-trial/          <-- Main Gateway Application (Original App)
+│   │   └── src/
+│   │       ├── main.ts
+│   │       └── app.module.ts
+│   └── auth-service/          <-- Target Microservice
+│       └── src/
+│           ├── main.ts
+│           └── auth-service.module.ts
+├── nest-cli.json              <-- Configures the Rspack builder
+├── package.json
+└── tsconfig.json
